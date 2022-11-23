@@ -1,0 +1,163 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <title>CG</title>
+    {%load static%}
+    <link rel="stylesheet" type="text/css" href="{% static 'estilo.css' %}">
+</head>
+  
+<body>
+    <header>
+        <!-- Navbar-->
+                <nav class="navbar navbar-expand-lg bg-light ubicacion">
+                    <img src="../static/asset/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                    <div class="container-fluid">
+                      <a class="navbar-brand" href="#">Cracked Games</a>
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">Pricing</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </nav>
+    </header>
+
+
+    <div class="row">
+      <!-- Blog entries-->
+      <div class="col-lg-8">
+          <!-- Featured blog post-->
+          <div class="card mb-4">
+              {% if  posts.0 %}
+              <a href="#!"><img style="max-width:100%;" class="card-img-top" src="{{ posts.0.image.url }}" alt="..." /></a>
+              <div class="card-body">
+                  <div class="small text-muted">{{posts.0.date_published}}</div>
+                  <h2 class="card-title">{{posts.0.title}}</h2>
+                  <p class="card-text">{{posts.0.short_content}}</p>
+                  <a class="btn btn-primary" href="{% url 'detail-post' posts.0.id %}">Read more →</a>
+              </div>
+              {% endif %}
+          </div>
+          <!-- Nested row for non-featured blog posts-->
+          <div class="row">
+              <div class="col-lg-6">
+                  <!-- Blog post-->
+                  {% if posts.1 %}
+                  <div class="card mb-4">
+                      <a href="#!"><img style="max-width:100%;" class="card-img-top" src="{{ posts.1.image.url }}" alt="..." /></a>
+                      <div class="card-body">
+                          <div class="small text-muted">{{posts.1.date_published}}</div>
+                          <h2 class="card-title">{{posts.1.title}}</h2>
+                          <p class="card-text">{{posts.1.short_content}}</p>
+                          <a class="btn btn-primary" href="{% url 'detail-post' posts.1.id %}">Read more →</a>
+                      </div>
+                  </div>
+                  {% endif %}
+                  <!-- Blog post-->
+                  <div class="card mb-4">
+                  {% if posts.2 %}
+                      <a href="#!"><img style="max-width:100%;" class="card-img-top" src="{{ posts.2.image.url }}" alt="..." /></a>
+                      <div class="card-body">
+                          <div class="small text-muted">{{posts.2.date_published}}</div>
+                          <h2 class="card-title">{{posts.2.title}}</h2>
+                          <p class="card-text">{{posts.2.short_content}}</p>
+                          <a class="btn btn-primary" href="{% url 'detail-post' posts.2.id %}">Read more →</a>
+                      </div>
+                  </div>
+                  {% endif %}
+              </div>
+              <div class="col-lg-6">
+                  {% if posts.3 %}
+                  <!-- Blog post-->
+                  <div class="card mb-4">
+                      <a href="#!"><img style="max-width:100%;" class="card-img-top" src="{{ posts.3.image.url }}" alt="..." /></a>
+                      <div class="card-body">
+                          <div class="small text-muted">{{posts.3.date_published}}</div>
+                          <h2 class="card-title">{{posts.3.title}}</h2>
+                          <p class="card-text">{{posts.3.short_content}}</p>
+                          <a class="btn btn-primary" href="{% url 'detail-post' posts.3.id %}">Read more →</a>
+                      </div>
+                  </div>
+                  {% endif %}
+                  <!-- Blog post-->
+                  <div class="card mb-4">
+                      {% if posts.4 %}
+                              <a href="#!"><img style="max-width:100%;" class="card-img-top" src="{{ posts.4.image.url }}" alt="..." /></a>
+                      <div class="card-body">
+                          <div class="small text-muted">{{posts.4.date_published}}</div>
+                          <h2 class="card-title">{{posts.4.title}}</h2>
+                          <p class="card-text">{{posts.4.short_content}}</p>
+                          <a class="btn btn-primary" href="{% url 'detail-post' posts.4.id %}">Read more →</a>
+                      </div>
+                      {% endif %}
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Side widgets-->
+      <div class="col-lg-4">
+          <!-- Search widget-->
+          <div class="card mb-4">
+              <div class="card-header">Search</div>
+              <div class="card-body">
+                  <form action="{% url 'search-by-name-post' %}" method="get">
+                      {% csrf_token %}
+                      <input type="search" name="post-title">
+                      <input type="submit" value="go">
+                  </form>
+              </div>
+          </div>
+          <!-- Categories widget-->
+          <div class="card mb-4">
+              <div class="card-header">Categories</div>
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-sm-6">
+                          <ul class="list-unstyled mb-0">
+                              <li><a href="#!">Web Design</a></li>
+                              <li><a href="#!">HTML</a></li>
+                              <li><a href="#!">Freebies</a></li>
+                          </ul>
+                      </div>
+                      <div class="col-sm-6">
+                          <ul class="list-unstyled mb-0">
+                              <li><a href="#!">JavaScript</a></li>
+                              <li><a href="#!">CSS</a></li>
+                              <li><a href="#!">Tutorials</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- Side widget-->
+          <div class="card mb-4">
+              <div class="card-header">Side Widget</div>
+              <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+          </div>
+      </div>
+  </div>
+
+    <footer>
+
+    </footer>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+</body>
+</html>
